@@ -1,8 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%- include("partials/header") %>
+    <%- include("partials/head") %>
+    <link rel="stylesheet" href="stylesheets/header.css" />
+    <link rel="stylesheet" href="stylesheets/index/index.css" />
     <title>Homepage</title>
   </head>
-  <body></body>
+  <body>
+    <%- include("partials/header") %>
+    <main>
+      <section class="backimg">
+        <div class="filter"></div>
+
+        <!-- 選擇幣別 -->
+        <div class="currency_choose">
+          <div class="selectitem">
+            <form action="/currencyhandling" method="GET" id="currency_form">
+              <select
+                class="form-select"
+                aria-label="Default select example"
+                name="currency"
+                onchange="change_currency()"
+              >
+                <option value="">SELECT CURRENCY</option>
+                <option value="0" selected>美金(USD)</option>
+                <option value="1">港幣(HKD)</option>
+                <option value="2">英鎊(GBP))</option>
+                <option value="3">澳幣(AUD)</option>
+                <option value="4">加拿大幣(CAD)</option>
+                <option value="5">新加坡幣(SGD)</option>
+                <option value="6">瑞士法郎(CHF)</option>
+                <option value="7">日圓(JPY)</option>
+                <option value="8">南非幣(ZAR)</option>
+                <option value="9">瑞典幣(SEK)</option>
+                <option value="10">紐元(NZD)</option>
+                <option value="11">泰幣(THB)</option>
+                <option value="12">菲國比索(PHP)</option>
+                <option value="13">印尼幣(IDR)</option>
+                <option value="14">歐元(EUR)</option>
+                <option value="15">韓元(KRW)</option>
+                <option value="16">越南盾(VND)</option>
+                <option value="17">馬來幣(MYR)</option>
+                <option value="18">人民幣(CNY)</option>
+              </select>
+              <!-- <button type="submit" class="btn btn-dark" id="btn_submit">
+                查詢
+              </button> -->
+
+              <!-- 偷偷記錄表單傳過去的值 -->
+            </form>
+
+            <script>
+              function change_currency() {
+                $("#currency_form").submit();
+              }
+            </script>
+          </div>
+
+          <div class="cash_or_deposit">
+            <button
+              type="button"
+              class="btn btn-outline-success"
+              id="cash_rate"
+            >
+              現金匯率
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              id="deposit_rate"
+            >
+              即期匯率
+            </button>
+          </div>
+        </div>
+
+        <!-- 金額顯示 -->
+        <div class="value_showing">
+          <div class="buy">
+            <h1>銀行買入價</h1>
+          </div>
+          <div class="sell">
+            <h1>銀行賣出價</h1>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
 </html>

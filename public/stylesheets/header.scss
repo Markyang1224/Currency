@@ -1,0 +1,30 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  div.logo {
+    display: flex;
+    align-items: center;
+    flex: 5 1 400px;
+    margin-left: 2rem;
+    img {
+      width: 6.5vw;
+      height: 6vw;
+    }
+  }
+  nav {
+    flex: 2.5 1 400px;
+    ul {
+      display: flex;
+      list-style-type: none;
+      justify-content: space-around;
+      margin-bottom: 0;
+    }
+  }
+}
