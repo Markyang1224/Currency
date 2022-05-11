@@ -37,7 +37,7 @@ const index = async (req, res) => {
     //抓取幣別
     const CurrencySelector = `tbody > tr:nth-child(1) > td.currency.phone-small-font > div > div.hidden-phone.print_show`;
     $(CurrencySelector).each((idx, elem) => {
-      let value = $(elem).text();
+      let value = $(elem).text().trim();
       console.log(value);
     });
 

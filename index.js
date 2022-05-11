@@ -6,15 +6,16 @@ const mongoose = require("mongoose");
 const path = require("path");
 const Home = require("./controllers/HomeController");
 
-//middleware
+/////////////////middleware////////////////////
 
 app.set("view engine", "ejs");
+//static file
 app.use(express.static(path.join(__dirname, "public")));
 //req.body
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//endpoint
+//////////////////endpoint//////////////////
 
 app.get("/", Home.index);
 
