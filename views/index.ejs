@@ -15,7 +15,7 @@
         <!-- 選擇幣別 -->
         <div class="currency_choose">
           <div class="selectitem">
-            <form action="/currencyhandling" method="GET" id="currency_form">
+            <form action="/currencyhandling" method="post" id="currency_form">
               <select
                 class="form-select"
                 aria-label="Default select example"
@@ -79,9 +79,11 @@
         <div class="value_showing">
           <div class="buy">
             <h1>銀行買入價</h1>
+            <h1><%= DefaultData[0].cash_buy %></h1></h1>
           </div>
           <div class="sell">
             <h1>銀行賣出價</h1>
+            <h1><%= DefaultData[0].cash_sell %></h1></h1>
           </div>
         </div>
       </section>
