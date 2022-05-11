@@ -78,17 +78,29 @@
         <!-- 金額顯示 -->
         <div class="value_showing">
           <div class="currency">
-            
+            <h1><%= DefaultData[0].currency_name %> </h1>
           </div>
           <div class="buy">
             <h1>銀行買入價</h1>
-            <h1><%= DefaultData[0].cash_buy %></h1></h1>
+            <h1 class="cash_value"><%= DefaultData[0].cash_buy %></h1></h1>
+            <h1 class="deposit_value" style="display: none"><%= DefaultData[0].deposit_buy %></h1></h1>
           </div>
           <div class="sell">
             <h1>銀行賣出價</h1>
-            <h1><%= DefaultData[0].cash_sell %></h1></h1>
+            <h1 class="cash_value"><%= DefaultData[0].cash_sell %></h1></h1>
+            <h1 class="deposit_value" style="display: none"><%= DefaultData[0].deposit_sell %></h1></h1>
           </div>
         </div>
+        <script>
+          $("#cash_rate").click(() => {
+            $(".cash_value").show()
+            $(".deposit_value").hide()            
+          })
+          $("#deposit_rate").click(() => {
+            $(".cash_value").hide()
+            $(".deposit_value").show()
+          })
+        </script>
       </section>
     </main>
   </body>
