@@ -15,40 +15,48 @@
         <!-- 選擇幣別 -->
         <div class="currency_choose">
           <div class="selectitem">
-            <form action="/currencyhandling" method="post" id="currency_form">
+            <form action="/" method="post" id="currency_form">
               <select
                 class="form-select"
                 aria-label="Default select example"
-                name="currency"
+                name="currency_id"
                 onchange="change_currency()"
               >
                 <option value="">SELECT CURRENCY</option>
-                <option value="0" selected>美金(USD)</option>
-                <option value="1">港幣(HKD)</option>
-                <option value="2">英鎊(GBP))</option>
-                <option value="3">澳幣(AUD)</option>
-                <option value="4">加拿大幣(CAD)</option>
-                <option value="5">新加坡幣(SGD)</option>
-                <option value="6">瑞士法郎(CHF)</option>
-                <option value="7">日圓(JPY)</option>
-                <option value="8">南非幣(ZAR)</option>
-                <option value="9">瑞典幣(SEK)</option>
-                <option value="10">紐元(NZD)</option>
-                <option value="11">泰幣(THB)</option>
-                <option value="12">菲國比索(PHP)</option>
-                <option value="13">印尼幣(IDR)</option>
-                <option value="14">歐元(EUR)</option>
-                <option value="15">韓元(KRW)</option>
-                <option value="16">越南盾(VND)</option>
-                <option value="17">馬來幣(MYR)</option>
-                <option value="18">人民幣(CNY)</option>
+                <option value="1">美金(USD)</option>
+                <option value="2">港幣(HKD)</option>
+                <option value="3">英鎊(GBP))</option>
+                <option value="4">澳幣(AUD)</option>
+                <option value="5">加拿大幣(CAD)</option>
+                <option value="6">新加坡幣(SGD)</option>
+                <option value="7">瑞士法郎(CHF)</option>
+                <option value="8">日圓(JPY)</option>
+                <option value="9">南非幣(ZAR)</option>
+                <option value="10">瑞典幣(SEK)</option>
+                <option value="11">紐元(NZD)</option>
+                <option value="12">泰幣(THB)</option>
+                <option value="13">菲國比索(PHP)</option>
+                <option value="14">印尼幣(IDR)</option>
+                <option value="15">歐元(EUR)</option>
+                <option value="16">韓元(KRW)</option>
+                <option value="17">越南盾(VND)</option>
+                <option value="18">馬來幣(MYR)</option>
+                <option value="19">人民幣(CNY)</option>
               </select>
               <!-- <button type="submit" class="btn btn-dark" id="btn_submit">
                 查詢
               </button> -->
 
               <!-- 偷偷記錄表單傳過去的值 -->
+              <div style="display: none">
+                <p id="number"><%= Data[0].currency_id %></p>
+              </div>
             </form>
+
+            <script>
+              let a = $("#number").text();
+              $(`select option[value=${a}]`).attr("selected", "selected");
+            </script>
 
             <script>
               function change_currency() {
@@ -78,17 +86,17 @@
         <!-- 金額顯示 -->
         <div class="value_showing">
           <div class="currency">
-            <h1><%= DefaultData[0].currency_name %> </h1>
+            <h1><%= Data[0].currency_name %> </h1>
           </div>
           <div class="buy">
             <h1>銀行買入價</h1>
-            <h1 class="cash_value"><%= DefaultData[0].cash_buy %></h1></h1>
-            <h1 class="deposit_value" style="display: none"><%= DefaultData[0].deposit_buy %></h1></h1>
+            <h1 class="cash_value"><%= Data[0].cash_buy %></h1></h1>
+            <h1 class="deposit_value" style="display: none"><%= Data[0].deposit_buy %></h1></h1>
           </div>
           <div class="sell">
             <h1>銀行賣出價</h1>
-            <h1 class="cash_value"><%= DefaultData[0].cash_sell %></h1></h1>
-            <h1 class="deposit_value" style="display: none"><%= DefaultData[0].deposit_sell %></h1></h1>
+            <h1 class="cash_value"><%= Data[0].cash_sell %></h1></h1>
+            <h1 class="deposit_value" style="display: none"><%= Data[0].deposit_sell %></h1></h1>
           </div>
         </div>
         <script>
