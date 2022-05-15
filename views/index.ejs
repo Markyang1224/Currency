@@ -4,6 +4,8 @@
     <%- include("partials/head") %>
     <link rel="stylesheet" href="stylesheets/header.css" />
     <link rel="stylesheet" href="stylesheets/index/index.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <title>Homepage</title>
   </head>
   <body>
@@ -86,29 +88,39 @@
         <!-- 金額顯示 -->
         <div class="value_showing">
           <div class="currency">
-            <h1><%= Data[0].currency_name %> </h1>
+            <h1><%= Data[0].currency_name %></h1>
           </div>
           <div class="buy">
             <h1>銀行買入價</h1>
-            <h1 class="cash_value"><%= Data[0].cash_buy %></h1></h1>
-            <h1 class="deposit_value" style="display: none"><%= Data[0].deposit_buy %></h1></h1>
+            <h1 class="cash_value"><%= Data[0].cash_buy %></h1>
+            <h1 class="deposit_value" style="display: none">
+              <%= Data[0].deposit_buy %>
+            </h1>
           </div>
           <div class="sell">
             <h1>銀行賣出價</h1>
-            <h1 class="cash_value"><%= Data[0].cash_sell %></h1></h1>
-            <h1 class="deposit_value" style="display: none"><%= Data[0].deposit_sell %></h1></h1>
+            <h1 class="cash_value"><%= Data[0].cash_sell %></h1>
+            <h1 class="deposit_value" style="display: none">
+              <%= Data[0].deposit_sell %>
+            </h1>
           </div>
         </div>
         <script>
           $("#cash_rate").click(() => {
-            $(".cash_value").show()
-            $(".deposit_value").hide()            
-          })
+            $(".cash_value").show();
+            $(".deposit_value").hide();
+          });
           $("#deposit_rate").click(() => {
-            $(".cash_value").hide()
-            $(".deposit_value").show()
-          })
+            $(".cash_value").hide();
+            $(".deposit_value").show();
+          });
         </script>
+
+        <!-- https://www.chartjs.org/docs/latest/charts/line.html -->
+        <div style="height: 300px; width: 400px">
+          <canvas id="myChart" height="100px" width="100px"></canvas>
+          <script src="JS/chart.js"></script>
+        </div>
       </section>
     </main>
   </body>
