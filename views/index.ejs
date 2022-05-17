@@ -115,11 +115,63 @@
             $(".deposit_value").show();
           });
         </script>
+        <!-- 存放圖表數據 -->
+        <!--  <div class="HistoryData" style="display: none">
+          <% History_Data.forEach(e => {%>
+          <div>
+            <p><%= e.cash_buy %></p>
+            <p><%= e.cash_sell %></p>
+            <p><%= e.deposit_buy %></p>
+            <p><%= e.deposit_sell %></p>
+          </div>
 
+          <% }); %>
+        </div>-->
         <!-- https://www.chartjs.org/docs/latest/charts/line.html -->
         <div style="height: 300px; width: 400px">
           <canvas id="myChart" height="100px" width="100px"></canvas>
-          <script src="JS/chart.js"></script>
+          <script>
+            const labels = [
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+            ];
+
+            const data = {
+              labels: labels,
+              datasets: [
+                {
+                  label: "My First dataset",
+                  backgroundColor: "rgb(255, 99, 132)",
+                  borderColor: "rgb(255, 99, 132)",
+                  data: [0, 10, 5, 2, 20, 30, 45],
+                },
+                {
+                  label: "My Second dataset",
+                  backgroundColor: "rgb(255, 99, 132)",
+                  borderColor: "rgb(255, 99, 132)",
+                  data: [0, 15, 10, 5, 15, 20, 35],
+                },
+              ],
+            };
+
+            const config = {
+              type: "line",
+              data: data,
+              options: {
+                borderWidth: 2,
+                pointBorderWidth: 2,
+              },
+            };
+
+            const myChart = new Chart(
+              document.getElementById("myChart"),
+              config
+            );
+          </script>
         </div>
       </section>
     </main>
