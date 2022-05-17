@@ -17,13 +17,14 @@ async function gethistorydata(year, month, date) {
     "deposit_buy",
     "deposit_sell",
   ];
-  const AllData = []; //匯率總資料
 
+  let Data_temp = {}; //放入每行的匯率資料
   $(elementselector).each((parentidx, parentelem) => {
     //tr
-    let keyidx = 2;
-    let Data_temp = {}; //放入每行的匯率資料
+    Data_temp[keys[0]] = `${month}`;
+    Data_temp[keys[1]] = `${date}`;
 
+    let keyidx = 2;
     $(parentelem) //tr
       .children()
       .each((childrenidx, childrenelem) => {
@@ -34,23 +35,19 @@ async function gethistorydata(year, month, date) {
           Data_temp[keys[keyidx]] = tdvalue.trim(); //tdvlue中的空白及換行字元
           keyidx++;
         }
-        console.log(Data_temp);
       });
-
-    AllData.push(Data_temp); //push到總資料
   });
-
-  return AllData;
+  return Data_temp;
 }
 
-let today = new Date(); //今天日期
-today.setDate(today.getDate() - 1); //要抓取歷史資料 要從前一天開始抓
-let Now_year = today.getFullYear();
-let Now_month = today.getMonth() + 1;
-let Now_date = today.getDate();
-let count = 2; //計數用
-let Data = [];
 const HistoryData = async () => {
+  let today = new Date(); //今天日期
+  today.setDate(today.getDate() - 1); //要抓取歷史資料 要從前一天開始抓
+  let Now_year = today.getFullYear();
+  let Now_month = today.getMonth() + 1;
+  let Now_date = today.getDate();
+  let count = 5; //計數用
+  let Data = [];
   while (count > 0) {
     if (Now_month < 10) {
       Now_month = `0${Now_month}`;
@@ -59,11 +56,13 @@ const HistoryData = async () => {
       Now_date = `0${Now_date}`;
     }
     try {
-      let data_temp = await gethistorydata(Now_year, Now_month, Now_date);
-      if (Object.keys(data_temp[0]).length == 0) {
+      let Data_temp = await gethistorydata(Now_year, Now_month, Now_date);
+      // console.log(Data_temp);
+      //判斷物件是否為空值 object.keys(obj).length
+      if (Object.keys(Data_temp).length <= 2) {
       } else {
         count--; //次數-1
-        Data.push(data_temp);
+        Data.push(Data_temp);
       }
       today.setDate(today.getDate() - 1); //再抓前一天的資料
       Now_year = today.getFullYear();
@@ -72,10 +71,8 @@ const HistoryData = async () => {
     } catch (err) {
       console.log(err);
     }
-
-    //判斷物件是否為空   Object.keys().length
   }
-  // console.log(Data);
+  return Data;
 };
 
-HistoryData();
+module.exports = HistoryData;

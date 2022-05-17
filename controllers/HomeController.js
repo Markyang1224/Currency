@@ -1,5 +1,6 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
+const HistoryData = require("../public/JS/GetHistoryData");
 
 const index = async (req, res) => {
   async function GetDefaultData() {
@@ -58,8 +59,9 @@ const index = async (req, res) => {
 
   let Data = await GetDefaultData();
   console.log(Data);
-
-  res.render("index", { Data });
+  let History_Data = await HistoryData();
+  console.log(History_Data);
+  res.render("index", { Data, History_Data });
 };
 
 const formsubmit = async (req, res) => {
