@@ -24,7 +24,7 @@
                 name="currency_id"
                 onchange="change_currency()"
               >
-                <option value="">SELECT CURRENCY</option>
+                <option value="1">SELECT CURRENCY</option>
                 <option value="1">美金(USD)</option>
                 <option value="2">港幣(HKD)</option>
                 <option value="3">英鎊(GBP))</option>
@@ -90,19 +90,22 @@
           <div class="currency">
             <h1><%= Data[0].currency_name %></h1>
           </div>
-          <div class="buy">
-            <h1>銀行買入價</h1>
-            <h1 class="cash_value"><%= Data[0].cash_buy %></h1>
-            <h1 class="deposit_value" style="display: none">
-              <%= Data[0].deposit_buy %>
-            </h1>
-          </div>
-          <div class="sell">
-            <h1>銀行賣出價</h1>
-            <h1 class="cash_value"><%= Data[0].cash_sell %></h1>
-            <h1 class="deposit_value" style="display: none">
-              <%= Data[0].deposit_sell %>
-            </h1>
+
+          <div class="value">
+            <div class="buy">
+              <h1>銀行買入價</h1>
+              <h1 class="cash_value"><%= Data[0].cash_buy %></h1>
+              <h1 class="deposit_value" style="display: none">
+                <%= Data[0].deposit_buy %>
+              </h1>
+            </div>
+            <div class="sell">
+              <h1>銀行賣出價</h1>
+              <h1 class="cash_value"><%= Data[0].cash_sell %></h1>
+              <h1 class="deposit_value" style="display: none">
+                <%= Data[0].deposit_sell %>
+              </h1>
+            </div>
           </div>
         </div>
         <script>
@@ -116,9 +119,11 @@
           });
         </script>
         <!-- 存放圖表數據 -->
-        <!--  <div class="HistoryData" style="display: none">
+        <div class="HistoryData" style="display: none">
           <% History_Data.forEach(e => {%>
           <div>
+            <p><%= e.month %></p>
+            <p><%= e.date %></p>
             <p><%= e.cash_buy %></p>
             <p><%= e.cash_sell %></p>
             <p><%= e.deposit_buy %></p>
@@ -126,51 +131,165 @@
           </div>
 
           <% }); %>
-        </div>-->
+        </div>
+        <script>
+          const Data = []; //總資料
+          const keys = [
+            "month",
+            "date",
+            "cash_buy",
+            "cash_sell",
+            "deposit_buy",
+            "deposit_sell",
+          ];
+          let maxvalue = 0;
+          let minvalue = 0;
+          $(".HistoryData div").each((parentidx, parentelem) => {
+            let Data_temp = {}; //暫存資料
+            let idx = 0;
+            $(parentelem)
+              .children() //p標籤
+              .each((childrenidx, childrenelem) => {
+                Data_temp[keys[idx]] = childrenelem.innerHTML;
+
+                if (childrenelem.innerHTML > maxvalue) {
+                  maxvalue = childrenelem.innerHTML;
+                }
+                if (childrenelem.innerHTML < minvalue) {
+                  minvalue = childrenelem.innerHTML;
+                }
+                idx++;
+              });
+            Data.push(Data_temp);
+          });
+
+          console.log(Data);
+        </script>
         <!-- https://www.chartjs.org/docs/latest/charts/line.html -->
+
         <div style="height: 300px; width: 400px">
           <canvas id="myChart" height="100px" width="100px"></canvas>
           <script>
             const labels = [
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
+              `${Data[4].month}/${Data[4].date}`,
+              `${Data[3].month}/${Data[3].date}`,
+              `${Data[2].month}/${Data[2].date}`,
+              `${Data[1].month}/${Data[1].date}`,
+              `${Data[0].month}/${Data[0].date}`,
             ];
 
-            const data = {
+            const data1 = {
               labels: labels,
               datasets: [
                 {
-                  label: "My First dataset",
-                  backgroundColor: "rgb(255, 99, 132)",
-                  borderColor: "rgb(255, 99, 132)",
-                  data: [0, 10, 5, 2, 20, 30, 45],
+                  label: "銀行買入",
+                  backgroundColor: "rgba(0, 180, 17, 0.8)",
+                  borderColor: "rgba(0, 180, 17, 0.8)",
+                  data: [
+                    `${Data[0].cash_buy}`,
+                    `${Data[1].cash_buy}`,
+                    `${Data[2].cash_buy}`,
+                    `${Data[3].cash_buy}`,
+                    `${Data[4].cash_buy}`,
+                  ],
                 },
                 {
-                  label: "My Second dataset",
-                  backgroundColor: "rgb(255, 99, 132)",
-                  borderColor: "rgb(255, 99, 132)",
-                  data: [0, 15, 10, 5, 15, 20, 35],
+                  label: "銀行賣出",
+                  backgroundColor: "rgba(254, 0, 0, 0.8)",
+                  borderColor: "rgba(254, 0, 0, 0.8)",
+                  data: [
+                    `${Data[0].cash_sell}`,
+                    `${Data[1].cash_sell}`,
+                    `${Data[2].cash_sell}`,
+                    `${Data[3].cash_sell}`,
+                    `${Data[4].cash_sell}`,
+                  ],
+                },
+              ],
+            };
+            const data2 = {
+              labels: labels,
+              datasets: [
+                {
+                  label: "銀行買入",
+                  backgroundColor: "rgba(0, 180, 17, 0.8)",
+                  borderColor: "rgba(0, 180, 17, 0.8)",
+                  data: [
+                    `${Data[0].deposit_buy}`,
+                    `${Data[1].deposit_buy}`,
+                    `${Data[2].deposit_buy}`,
+                    `${Data[3].deposit_buy}`,
+                    `${Data[4].deposit_buy}`,
+                  ],
+                },
+                {
+                  label: "銀行賣出",
+                  backgroundColor: "rgba(254, 0, 0, 0.8)",
+                  borderColor: "rgba(254, 0, 0, 0.8)",
+                  data: [
+                    `${Data[0].deposit_sell}`,
+                    `${Data[1].deposit_sell}`,
+                    `${Data[2].deposit_sell}`,
+                    `${Data[3].deposit_sell}`,
+                    `${Data[4].deposit_sell}`,
+                  ],
                 },
               ],
             };
 
-            const config = {
+            const config1 = {
               type: "line",
-              data: data,
+              data: data1,
               options: {
                 borderWidth: 2,
                 pointBorderWidth: 2,
+                plugins: {
+                  legend: {
+                    labels: {
+                      // This more specific font property overrides the global property
+                      font: {
+                        weight: "bold",
+                        size: 16,
+                      },
+                    },
+                  },
+                },
+              },
+            };
+            const config2 = {
+              type: "line",
+              data: data2,
+              options: {
+                borderWidth: 2,
+                pointBorderWidth: 2,
+                plugins: {
+                  legend: {
+                    labels: {
+                      // This more specific font property overrides the global property
+                      font: {
+                        weight: "bold",
+                        size: 16,
+                      },
+                    },
+                  },
+                },
               },
             };
 
-            const myChart = new Chart(
+            //注意不能使用const 不然會出錯
+            let myChart = new Chart(
               document.getElementById("myChart"),
-              config
+              config1
             );
+
+            $("#deposit_rate").click(() => {
+              myChart.destroy();
+              myChart = new Chart(document.getElementById("myChart"), config2);
+            });
+            $("#cash_rate").click(() => {
+              myChart.destroy();
+              myChart = new Chart(document.getElementById("myChart"), config1);
+            });
           </script>
         </div>
       </section>

@@ -11,9 +11,12 @@ main {
   section.backimg {
     width: 100%;
     height: 80vh;
-    background-image: url("../../images/currency.jpg");
+    background-image: url("../../images/wallpaper.png");
+    background-position: center;
+    background-size: 100%;
     display: flex;
     align-items: center;
+    justify-content: center;
     // justify-content: space-around;
     position: relative;
     z-index: 0;
@@ -37,15 +40,24 @@ main {
 
     div.value_showing {
       display: flex;
-      div.buy,
-      div.sell {
+      flex-direction: column;
+      align-items: center;
+      div {
+        margin: 2rem 0;
+      }
+      div.value {
         display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin: 0rem 1.5rem;
-        h2 {
-          font-size: 5rem;
+        flex-direction: row;
+        div.buy,
+        div.sell {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          margin: 0rem 1.5rem;
+          h2 {
+            font-size: 5rem;
+          }
         }
       }
     }

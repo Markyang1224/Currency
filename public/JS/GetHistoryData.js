@@ -2,12 +2,12 @@ const axios = require("axios");
 const cheerio = require("cheerio");
 
 ////////////歷史資料
-async function gethistorydata(year, month, date) {
+async function gethistorydata(year, month, date, id) {
   const res = await axios.get(
     `https://rate.bot.com.tw/xrt/all/${year}-${month}-${date}`
   ); //透過axios發http request
   const $ = cheerio.load(res.data); //將data存入$
-  const elementselector = `tbody > tr:nth-child(1)`; //選擇器
+  const elementselector = `tbody > tr:nth-child(${id})`; //選擇器
 
   const keys = [
     "month",
@@ -40,7 +40,7 @@ async function gethistorydata(year, month, date) {
   return Data_temp;
 }
 
-const HistoryData = async () => {
+const HistoryData = async (id) => {
   let today = new Date(); //今天日期
   today.setDate(today.getDate() - 1); //要抓取歷史資料 要從前一天開始抓
   let Now_year = today.getFullYear();
@@ -56,7 +56,7 @@ const HistoryData = async () => {
       Now_date = `0${Now_date}`;
     }
     try {
-      let Data_temp = await gethistorydata(Now_year, Now_month, Now_date);
+      let Data_temp = await gethistorydata(Now_year, Now_month, Now_date, id);
       // console.log(Data_temp);
       //判斷物件是否為空值 object.keys(obj).length
       if (Object.keys(Data_temp).length <= 2) {

@@ -59,7 +59,7 @@ const index = async (req, res) => {
 
   let Data = await GetDefaultData();
   console.log(Data);
-  let History_Data = await HistoryData();
+  let History_Data = await HistoryData(1);
   console.log(History_Data);
   res.render("index", { Data, History_Data });
 };
@@ -68,7 +68,7 @@ const formsubmit = async (req, res) => {
   let { currency_id } = req.body;
   let id = Number(currency_id); //貨幣id
 
-  async function GetDefaultData() {
+  async function GetData() {
     const res = await axios.get("https://rate.bot.com.tw/xrt?Lang=zh-TW"); //透過axios發http request
     const $ = cheerio.load(res.data); //將data存入$
     // const elementselector = `.table > tbody:nth-child(2) > tr`; //選擇器
@@ -121,10 +121,12 @@ const formsubmit = async (req, res) => {
     return Data;
   }
 
-  let Data = await GetDefaultData();
+  let Data = await GetData();
   console.log(Data);
+  let History_Data = await HistoryData(id);
+  console.log(History_Data);
 
-  res.render("index", { Data });
+  res.render("index", { Data, History_Data });
 };
 
 module.exports = { index, formsubmit };

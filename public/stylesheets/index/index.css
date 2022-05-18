@@ -12,13 +12,18 @@ body {
 main section.backimg {
   width: 100%;
   height: 80vh;
-  background-image: url("../../images/currency.jpg");
+  background-image: url("../../images/wallpaper.png");
+  background-position: center;
+  background-size: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   position: relative;
   z-index: 0;
 }
@@ -49,10 +54,31 @@ main section.backimg div.value_showing {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-main section.backimg div.value_showing div.buy,
-main section.backimg div.value_showing div.sell {
+main section.backimg div.value_showing div {
+  margin: 2rem 0;
+}
+
+main section.backimg div.value_showing div.value {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+main section.backimg div.value_showing div.value div.buy,
+main section.backimg div.value_showing div.value div.sell {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -69,8 +95,8 @@ main section.backimg div.value_showing div.sell {
   margin: 0rem 1.5rem;
 }
 
-main section.backimg div.value_showing div.buy h2,
-main section.backimg div.value_showing div.sell h2 {
+main section.backimg div.value_showing div.value div.buy h2,
+main section.backimg div.value_showing div.value div.sell h2 {
   font-size: 5rem;
 }
 /*# sourceMappingURL=index.css.map */
