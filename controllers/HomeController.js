@@ -59,7 +59,7 @@ const index = async (req, res) => {
 
   let Data = await GetDefaultData();
   console.log(Data);
-  let History_Data = await HistoryData(1);
+  let History_Data = await HistoryData(1); //美元 id = 1
   console.log(History_Data);
   res.render("index", { Data, History_Data });
 };
