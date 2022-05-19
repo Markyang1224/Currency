@@ -133,7 +133,7 @@
           <% }); %>
         </div>
         <script>
-          const Data = []; //總資料
+          const HData = []; //總資料
           const keys = [
             "month",
             "date",
@@ -160,22 +160,22 @@
                 }
                 idx++;
               });
-            Data.push(Data_temp);
+            HData.push(Data_temp);
           });
 
-          console.log(Data);
+          console.log(HData);
         </script>
         <!-- https://www.chartjs.org/docs/latest/charts/line.html -->
 
-        <div style="height: 300px; width: 400px">
-          <canvas id="myChart" height="100px" width="100px"></canvas>
+        <div class="chart" style="height: 300px; width: 400px">
+          <canvas id="myChart" height="80px" width="100px"></canvas>
           <script>
             const labels = [
-              `${Data[4].month}/${Data[4].date}`,
-              `${Data[3].month}/${Data[3].date}`,
-              `${Data[2].month}/${Data[2].date}`,
-              `${Data[1].month}/${Data[1].date}`,
-              `${Data[0].month}/${Data[0].date}`,
+              `${HData[4].month}/${HData[4].date}`,
+              `${HData[3].month}/${HData[3].date}`,
+              `${HData[2].month}/${HData[2].date}`,
+              `${HData[1].month}/${HData[1].date}`,
+              `${HData[0].month}/${HData[0].date}`,
             ];
 
             const data1 = {
@@ -186,11 +186,11 @@
                   backgroundColor: "rgba(0, 180, 17, 0.8)",
                   borderColor: "rgba(0, 180, 17, 0.8)",
                   data: [
-                    `${Data[0].cash_buy}`,
-                    `${Data[1].cash_buy}`,
-                    `${Data[2].cash_buy}`,
-                    `${Data[3].cash_buy}`,
-                    `${Data[4].cash_buy}`,
+                    `${HData[0].cash_buy}`,
+                    `${HData[1].cash_buy}`,
+                    `${HData[2].cash_buy}`,
+                    `${HData[3].cash_buy}`,
+                    `${HData[4].cash_buy}`,
                   ],
                 },
                 {
@@ -198,11 +198,11 @@
                   backgroundColor: "rgba(254, 0, 0, 0.8)",
                   borderColor: "rgba(254, 0, 0, 0.8)",
                   data: [
-                    `${Data[0].cash_sell}`,
-                    `${Data[1].cash_sell}`,
-                    `${Data[2].cash_sell}`,
-                    `${Data[3].cash_sell}`,
-                    `${Data[4].cash_sell}`,
+                    `${HData[0].cash_sell}`,
+                    `${HData[1].cash_sell}`,
+                    `${HData[2].cash_sell}`,
+                    `${HData[3].cash_sell}`,
+                    `${HData[4].cash_sell}`,
                   ],
                 },
               ],
@@ -215,11 +215,11 @@
                   backgroundColor: "rgba(0, 180, 17, 0.8)",
                   borderColor: "rgba(0, 180, 17, 0.8)",
                   data: [
-                    `${Data[0].deposit_buy}`,
-                    `${Data[1].deposit_buy}`,
-                    `${Data[2].deposit_buy}`,
-                    `${Data[3].deposit_buy}`,
-                    `${Data[4].deposit_buy}`,
+                    `${HData[0].deposit_buy}`,
+                    `${HData[1].deposit_buy}`,
+                    `${HData[2].deposit_buy}`,
+                    `${HData[3].deposit_buy}`,
+                    `${HData[4].deposit_buy}`,
                   ],
                 },
                 {
@@ -227,11 +227,11 @@
                   backgroundColor: "rgba(254, 0, 0, 0.8)",
                   borderColor: "rgba(254, 0, 0, 0.8)",
                   data: [
-                    `${Data[0].deposit_sell}`,
-                    `${Data[1].deposit_sell}`,
-                    `${Data[2].deposit_sell}`,
-                    `${Data[3].deposit_sell}`,
-                    `${Data[4].deposit_sell}`,
+                    `${HData[0].deposit_sell}`,
+                    `${HData[1].deposit_sell}`,
+                    `${HData[2].deposit_sell}`,
+                    `${HData[3].deposit_sell}`,
+                    `${HData[4].deposit_sell}`,
                   ],
                 },
               ],
