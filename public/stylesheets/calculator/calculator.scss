@@ -31,26 +31,7 @@ main {
 
     div.value_showing {
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      div {
-        margin: 2rem 0;
-      }
-      div.value {
-        display: flex;
-        flex-direction: row;
-        div.buy,
-        div.sell {
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-          margin: 0rem 1.5rem;
-          h2 {
-            font-size: 5rem;
-          }
-        }
-      }
+      flex-direction: row;
     }
   }
 }

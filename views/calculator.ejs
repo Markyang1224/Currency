@@ -2,10 +2,128 @@
 <html lang="en">
   <head>
     <%- include("partials/head") %>
-
+    <link rel="stylesheet" href="/stylesheets/calculator/calculator.css" />
     <title>Document</title>
   </head>
   <body>
     <%- include("partials/header") %>
+    <main>
+      <section class="backimg">
+        <div class="filter"></div>
+
+        <!-- 選擇幣別 -->
+        <div class="currency_choose">
+          <div class="selectitem">
+            <form action="/calculator" method="post">
+              <div class="currency">
+                <select
+                class="form-select"
+                aria-label="Default select example"
+                name="currency_id"
+              >
+                <option value="1">SELECT CURRENCY</option>
+                <option value="1">美金(USD)</option>
+                <option value="2">港幣(HKD)</option>
+                <option value="3">英鎊(GBP))</option>
+                <option value="4">澳幣(AUD)</option>
+                <option value="5">加拿大幣(CAD)</option>
+                <option value="6">新加坡幣(SGD)</option>
+                <option value="7">瑞士法郎(CHF)</option>
+                <option value="8">日圓(JPY)</option>
+                <option value="9">南非幣(ZAR)</option>
+                <option value="10">瑞典幣(SEK)</option>
+                <option value="11">紐元(NZD)</option>
+                <option value="12">泰幣(THB)</option>
+                <option value="13">菲國比索(PHP)</option>
+                <option value="14">印尼幣(IDR)</option>
+                <option value="15">歐元(EUR)</option>
+                <option value="16">韓元(KRW)</option>
+                <option value="17">越南盾(VND)</option>
+                <option value="18">馬來幣(MYR)</option>
+                <option value="19">人民幣(CNY)</option>
+              </select>
+              </div>
+              
+
+              <div class="type">
+                <select
+                  class="form-select"
+                  aria-label="Default select example"
+                  name="type"
+                >
+                  <option value="1">現金-銀行買入價</option>
+                  <option value="2">現金-銀行賣出價</option>
+                  <option value="3">即期-銀行買入價</option>
+                  <option value="4">即期-銀行賣出價</option>
+                </select>
+              </div>
+
+              <div>
+                <div class="input_value">
+                  <input
+                    type="number"
+                    id="input"
+                    style="text-align: center"
+                    name="money"
+                    value="1"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  class="btn btn-info"
+                  style="padding: 0.1rem 0.5rem"
+                >
+                  查詢
+                </button>
+              </div>
+            </form>
+
+            <!-- 偷偷記錄表單傳過去的值 -->
+            <div style="display: initial">
+              <p id="currency_id"><%= currency_id %></p>
+              <p id="type"><%= type %></p>
+              <p id="money"><%= money %></p>
+            </div>
+
+            <!-- 讓網頁刷新時, 會顯示剛剛所選或輸入的值 -->
+            <script>
+              let currency_id = $("#currency_id").text();
+              $(`.currency option[value=${currency_id}]`).attr("selected", "selected");
+
+              let type = $("#type").text();
+              $(`.type option[value=${type}]`).attr("selected", "selected");
+              
+              let money = $("#money").text();
+              $(`.input_value input`).attr("value", money);
+            </script>
+          </div>
+        </div>
+
+
+        <div class="value_showing">
+          <div class="first_column">  
+              <% for(let i = 0 ; i <= 4 ; i++){ %> 
+              <h5><span class="badge bg-secondary"><%= Data[i].currency_name %> </span></br><%= Data[i].money %> </h5>
+              <% } %> 
+          </div>
+          <div class="second_column">
+            <% for(let i = 5 ; i <= 9 ; i++){ %> 
+              <h5><span class="badge bg-secondary"><%= Data[i].currency_name %> </span></br><%= Data[i].money %> </h5>
+              <% } %> 
+          </div>
+          <div class="third_column">
+            <% for(let i = 10 ; i <= 14 ; i++){ %> 
+              <h5><span class="badge bg-secondary"><%= Data[i].currency_name %> </span></br><%= Data[i].money %> </h5>
+              <% } %> 
+          </div>
+          <div class="forth_column">
+            <% for(let i = 15 ; i <= 18 ; i++){ %> 
+              <h5><span class="badge bg-secondary"><%= Data[i].currency_name %> </span></br><%= Data[i].money %> </h5>
+              <% } %> 
+          </div>
+      </div>
+      
+      </section>
+    </main>
   </body>
 </html>

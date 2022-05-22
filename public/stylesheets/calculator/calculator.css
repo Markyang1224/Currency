@@ -43,49 +43,9 @@ main section.backimg div.value_showing {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-}
-
-main section.backimg div.value_showing div {
-  margin: 2rem 0;
-}
-
-main section.backimg div.value_showing div.value {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
 }
-
-main section.backimg div.value_showing div.value div.buy,
-main section.backimg div.value_showing div.value div.sell {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin: 0rem 1.5rem;
-}
-
-main section.backimg div.value_showing div.value div.buy h2,
-main section.backimg div.value_showing div.value div.sell h2 {
-  font-size: 5rem;
-}
-/*# sourceMappingURL=index.css.map */
+/*# sourceMappingURL=calculator.css.map */

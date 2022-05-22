@@ -5,7 +5,7 @@ dotenv.config();
 const mongoose = require("mongoose");
 const path = require("path");
 const Home = require("./controllers/HomeController");
-const Calculator = require("./controllers/CalculatorController");
+const CalculatorRoute = require("./routes/calculator");
 
 /////////////////middleware////////////////////
 
@@ -16,13 +16,13 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use("/calculator", CalculatorRoute);
 //////////////////endpoint//////////////////
 
 app.get("/", Home.index);
 
 app.post("/", Home.formsubmit);
 
-app.get("/calculator", Calculator.index);
 app.listen(3000, (req, res) => {
   console.log("Server is listening on port 3000");
 });

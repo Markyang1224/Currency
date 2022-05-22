@@ -51,12 +51,12 @@
 
               <!-- 偷偷記錄表單傳過去的值 -->
               <div style="display: none">
-                <p id="number"><%= Data[0].currency_id %></p>
+                <p id="currency_id"><%= Data[0].currency_id %></p>
               </div>
             </form>
 
             <script>
-              let a = $("#number").text();
+              let a = $("#currency_id").text();
               $(`select option[value=${a}]`).attr("selected", "selected");
             </script>
 
