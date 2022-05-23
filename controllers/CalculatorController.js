@@ -57,10 +57,14 @@ const index = async (req, res) => {
               let OriginalCurrency = `table > tbody > tr:nth-child(1) > td:nth-child(2)`;
               let OriginalValue = $(OriginalCurrency).text();
 
-              //計算
-              rateobj_temp[keys[6]] =
-                Math.floor((OriginalValue / Number(tdvalue.trim())) * 1000) /
-                1000;
+              if (tdvalue.trim() == "-") {
+                rateobj_temp[keys[6]] = "..";
+              } else {
+                //計算
+                rateobj_temp[keys[6]] =
+                  Math.floor((OriginalValue / Number(tdvalue.trim())) * 1000) /
+                  1000;
+              }
             }
           });
 
@@ -141,13 +145,17 @@ const calculate = async (req, res) => {
               })`;
               let OriginalValue = $(OriginalCurrency).text();
 
-              //計算
-              rateobj_temp[keys[6]] =
-                Math.floor(
-                  (OriginalValue / Number(tdvalue.trim())) *
-                    Number(money) *
-                    1000
-                ) / 1000;
+              if (tdvalue.trim() == "-") {
+                rateobj_temp[keys[6]] = "..";
+              } else {
+                //計算
+                rateobj_temp[keys[6]] =
+                  Math.floor(
+                    (OriginalValue / Number(tdvalue.trim())) *
+                      Number(money) *
+                      1000
+                  ) / 1000;
+              }
             }
           });
 

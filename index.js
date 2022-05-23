@@ -7,6 +7,15 @@ const path = require("path");
 const Home = require("./controllers/HomeController");
 const CalculatorRoute = require("./routes/calculator");
 
+mongoose
+  .connect(process.env.DB_CONNECT)
+  .then(() => {
+    console.log("Connect to MongoDB Atalas");
+  })
+  .catch((err) => {
+    console.log("Connect Unsuccessful");
+  });
+
 /////////////////middleware////////////////////
 
 app.set("view engine", "ejs");

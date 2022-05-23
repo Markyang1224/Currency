@@ -25,6 +25,10 @@ main section.backimg div.filter {
   height: 80vh;
 }
 
+main section.backimg div {
+  margin: 0rem 2rem;
+}
+
 main section.backimg div.currency_choose {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -47,5 +51,10 @@ main section.backimg div.value_showing {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+}
+
+main section.backimg div.value_showing div h5 {
+  text-align: center;
+  margin: 1rem 0rem;
 }
 /*# sourceMappingURL=calculator.css.map */

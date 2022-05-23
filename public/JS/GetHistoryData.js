@@ -48,7 +48,7 @@ const HistoryData = async (id) => {
   let Now_date = today.getDate();
   let count = 5; //計數用
   let Data = [];
-  console.log(Now_date);
+
   while (count > 0) {
     if (Now_month < 10) {
       Now_month = `0${Now_month}`;
