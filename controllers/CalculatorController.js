@@ -108,8 +108,6 @@ const calculate = async (req, res) => {
 
     /////////////以下根據使用者選擇的轉換方式進行轉換, 存放位置在data[2], keyidx根據type + 1////////////////
 
-    //總共19筆
-
     let i = 1;
     while (i < 20) {
       let CurrencySelector = `tbody > tr:nth-child(${i}) > td.currency.phone-small-font > div > div.hidden-phone.print_show`;
