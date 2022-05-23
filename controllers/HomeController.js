@@ -6,7 +6,6 @@ const index = async (req, res) => {
   async function GetDefaultData() {
     const res = await axios.get("https://rate.bot.com.tw/xrt?Lang=zh-TW"); //透過axios發http request
     const $ = cheerio.load(res.data); //將data存入$
-    // const elementselector = `.table > tbody:nth-child(2) > tr`; //選擇器
     const elementselector = `tbody > tr:nth-child(1)`; //選擇器
     const keys = [
       "currency_name",
