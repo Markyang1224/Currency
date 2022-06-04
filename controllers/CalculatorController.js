@@ -83,7 +83,7 @@ const index = async (req, res) => {
 
   let Data = await GetDefaultData();
 
-  res.render("calculator", { Data, currency_id, type, money });
+  res.render("calculator", { Data, currency_id, type, money, user: req.user });
 };
 
 const calculate = async (req, res) => {
@@ -168,6 +168,6 @@ const calculate = async (req, res) => {
 
   let Data = await GetDefaultData();
 
-  res.render("calculator", { Data, currency_id, type, money });
+  res.render("calculator", { Data, currency_id, type, money, user: req.user });
 };
 module.exports = { index, calculate };

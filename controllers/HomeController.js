@@ -58,7 +58,8 @@ const index = async (req, res) => {
 
   let Data = await GetDefaultData();
   let History_Data = await HistoryData(1); //美元 id = 1
-  res.render("index", { Data, History_Data });
+
+  res.render("index", { Data, History_Data, user: req.user });
 };
 
 const formsubmit = async (req, res) => {
@@ -121,7 +122,7 @@ const formsubmit = async (req, res) => {
   let Data = await GetData();
   let History_Data = await HistoryData(id);
 
-  res.render("index", { Data, History_Data });
+  res.render("index", { Data, History_Data, user: req.user });
 };
 
 module.exports = { index, formsubmit };

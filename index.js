@@ -4,8 +4,14 @@ const dotenv = require("dotenv");
 dotenv.config();
 const mongoose = require("mongoose");
 const path = require("path");
+const session = require("express-session");
+const passport = require("passport");
 const Home = require("./controllers/HomeController");
-const CalculatorRoute = require("./routes/calculator");
+const Calculator = require("./routes/calculator");
+const Auth = require("./routes/auth_route");
+const Member = require("./routes/member");
+
+require("./config/passport");
 
 mongoose
   .connect(process.env.DB_CONNECT)
@@ -25,7 +31,21 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/calculator", CalculatorRoute);
+//session 設定
+app.use(
+  session({
+    secret: process.env.SECRET,
+    resave: false,
+    saveUninitialized: true,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use("/calculator", Calculator);
+app.use("/auth", Auth);
+app.use("/member", Member);
 //////////////////endpoint//////////////////
 
 app.get("/", Home.index);
