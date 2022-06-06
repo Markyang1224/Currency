@@ -14,8 +14,32 @@
     <main>
       <section class="backimg">
         <!-- 選擇幣別 -->
+
         <div class="currency_choose">
           <div class="selectitem">
+            <% if(user){ %>
+            <form action="/collect" method="post">
+              <input
+                type="hidden"
+                name="currency_name"
+                value="<%= Data[0].currency_name %> "
+              />
+              <input
+                type="hidden"
+                name="currency_id"
+                value="<%= Data[0].currency_id %> "
+              />
+              <input type="hidden" name="user_id" value="<%= user._id %> " />
+
+              <button
+                type="submit"
+                class="btn btn-outline-dark"
+                style="margin-bottom: 1rem"
+              >
+                <%= Collection_status %>
+              </button>
+            </form>
+            <% } %>
             <form action="/" method="post" id="currency_form">
               <select
                 class="form-select"

@@ -52,6 +52,8 @@ app.get("/", Home.index);
 
 app.post("/", Home.formsubmit);
 
+app.post("/collect", Home.collect);
+
 app.listen(3000, (req, res) => {
   console.log("Server is listening on port 3000");
 });
