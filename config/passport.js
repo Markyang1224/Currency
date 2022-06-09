@@ -24,7 +24,7 @@ passport.use(
     },
     (accessToken, refreshToken, profile, done) => {
       //passport callback 登入完成後將會顯示的畫面
-      console.log(profile);
+
       User.findOne({ googleID: profile.id }).then((foundUser) => {
         if (foundUser) {
           console.log("User already exist");

@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const collectionschema = new mongoose.Schema({
-  user_id: {
+  email: {
     type: String,
   },
   currency_name: {

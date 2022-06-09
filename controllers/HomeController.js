@@ -60,28 +60,27 @@ const index = async (req, res) => {
 
   let Data = await GetDefaultData();
   let History_Data = await HistoryData(1); //美元 id = 1
-
+  console.log(Data);
   //資料庫查看是否有沒有收藏
 
-  function GetCollectionStatus() {
+  async function GetCollectionStatus() {
+    let status;
     if (req.user) {
-      try {
-        Collection.findOne({ user_id: req.user._id, currency_id: "1" }).then(
-          (founded) => {
-            if (founded) {
-              Collection_status = "已收藏";
-              console.log(Collection_status);
-              return Collection_status;
-            } else {
-              Collection_status = "收藏";
-              return Collection_status;
-            }
+      await Collection.findOne({ email: req.user.email, currency_id: "1" })
+        .then((founded) => {
+          if (founded) {
+            status = "已收藏";
+          } else {
+            status = "收藏";
           }
-        );
-      } catch (err) {
-        console.log(err);
-      }
+          console.log(founded);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
+
+    return status;
   }
 
   let Collection_status = await GetCollectionStatus();
@@ -155,22 +154,27 @@ const formsubmit = async (req, res) => {
   let History_Data = await HistoryData(id);
 
   //資料庫查看是否有沒有收藏
-  let Collection_status;
-  if (req.user) {
-    try {
-      Collection.findOne({ user_id: req.user._id, currency_id }).then(
-        (founded) => {
+  async function GetCollectionStatus() {
+    let status;
+    if (req.user) {
+      await Collection.findOne({ email: req.user.email, currency_id })
+        .then((founded) => {
           if (founded) {
-            Collection_status = "已收藏";
+            status = "已收藏";
           } else {
-            Collection_status = "收藏";
+            status = "收藏";
           }
-        }
-      );
-    } catch (err) {
-      console.log(err);
+          console.log(founded);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
+
+    return status;
   }
+
+  let Collection_status = await GetCollectionStatus();
 
   res.render("index", {
     Data,
@@ -181,7 +185,7 @@ const formsubmit = async (req, res) => {
 };
 
 const collect = async (req, res) => {
-  let { user_id, currency_name, currency_id } = req.body;
+  let { currency_name, currency_id } = req.body;
 
   let id = Number(currency_id); //貨幣id
 
@@ -241,32 +245,41 @@ const collect = async (req, res) => {
   let Data = await GetData();
   let History_Data = await HistoryData(id);
 
-  try {
-    Collection.findOne({ user_id, currency_id }).then((founded) => {
-      if (!founded) {
-        new Collection({
-          user_id,
-          currency_name,
-          currency_id,
+  //store data or delete data
+
+  async function GetCollectionStatus() {
+    let status;
+    if (req.user) {
+      await Collection.findOne({ email: req.user.email, currency_id })
+        .then(async (founded) => {
+          if (founded) {
+            await Collection.deleteOne({ email: req.user.email, currency_id });
+            status = "收藏";
+          } else {
+            await new Collection({
+              email: req.user.email,
+              currency_name,
+              currency_id,
+            }).save();
+            status = "已收藏";
+          }
         })
-          .save()
-          .then(() => {
-            console.log("save to db");
-          })
-          .catch(() => {
-            console.log("failed");
-          });
-      } else {
-        Collection.deleteOne({ user_id, currency_id }).then(() => {
-          console.log("delete it");
+        .catch((err) => {
+          console.log(err);
         });
-      }
-    });
-  } catch (err) {
-    console.log(err);
+    }
+    console.log(status);
+    return status;
   }
 
-  res.render("index", { Data, History_Data, user: req.user });
+  let Collection_status = await GetCollectionStatus();
+
+  res.render("index", {
+    Data,
+    History_Data,
+    user: req.user,
+    Collection_status,
+  });
 };
 
 module.exports = { index, formsubmit, collect };
