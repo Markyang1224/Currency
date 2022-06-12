@@ -10,16 +10,52 @@
     <main>
       <section class="backimg">
         <div class="filter"></div>
-        <div class="collection">
+
+        <div class="overflow-auto">
+          <% Data.forEach((elem , idx) => {%>
           <div>
             <button type="button" class="btn btn-light">
-              <h4>美金(USD)</h4>
+              <h4><%= elem.currency_name %></h4>
             </button>
           </div>
+          <% }) %>
         </div>
-        <div class="statas">
-          <div class="details"></div>
+
+        <!-- 金額顯示 -->
+        <% for(let i = 0 ; i < Data.length ; i++){ %>
+        <div
+          class="value_showing"
+          id="currency:<%= Data[i].currency_id %>"
+          style="display: none"
+        >
+          <div class="currency">
+            <h1><%= Data[i].currency_name %></h1>
+          </div>
+
+          <div class="value">
+            <div class="title">
+              <h1>銀行買入價</h1>
+              <h1>銀行賣入價</h1>
+            </div>
+            <div class="cash">
+              <h2><span class="badge bg-secondary">現金</span></h2>
+              <h2><%= Data[i].cash_buy%></h2>
+              <h2><%= Data[i].cash_sell%></h2>
+            </div>
+            <div class="deposit">
+              <h2><span class="badge bg-secondary">即期</span></h2>
+              <h2><%= Data[i].deposit_buy%></h2>
+              <h2><%= Data[i].deposit_sell%></h2>
+            </div>
+          </div>
         </div>
+        <% } %>
+
+        <script>
+          $("div.test button").click(() => {
+            console.log("click");
+          });
+        </script>
       </section>
     </main>
   </body>

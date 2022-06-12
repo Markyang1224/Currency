@@ -60,7 +60,6 @@ const index = async (req, res) => {
 
   let Data = await GetDefaultData();
   let History_Data = await HistoryData(1); //美元 id = 1
-  console.log(Data);
   //資料庫查看是否有沒有收藏
 
   async function GetCollectionStatus() {
@@ -73,7 +72,6 @@ const index = async (req, res) => {
           } else {
             status = "收藏";
           }
-          console.log(founded);
         })
         .catch((err) => {
           console.log(err);
@@ -164,7 +162,6 @@ const formsubmit = async (req, res) => {
           } else {
             status = "收藏";
           }
-          console.log(founded);
         })
         .catch((err) => {
           console.log(err);
@@ -268,7 +265,7 @@ const collect = async (req, res) => {
           console.log(err);
         });
     }
-    console.log(status);
+
     return status;
   }
 
