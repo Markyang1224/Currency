@@ -26,7 +26,39 @@ const index = async (req, res) => {
     console.log(error);
   }
 
-  res.render("member", { user: req.user, Data });
+  let targetCurrency = Data[0];
+  res.render("member", { user: req.user, Data, targetCurrency });
 };
 
-module.exports = { index };
+const changecurrency = async (req, res) => {
+  let { currency_id } = req.params;
+
+  let email = req.user.email;
+  const Data = []; //存放收藏資料
+
+  try {
+    await Collection.find({ email: email })
+      .then(async (founded) => {
+        // 抓取收藏匯率資料
+        //注意: async await 不能套用在 foreach迴圈, 他會把裡面的function視為一個普通的function,
+        // 不管你的return 是不是promise,也不會等到 promise被 resolve或 reject才執行下一次迴圈。
+
+        for (let i = 0; i < founded.length; i++) {
+          let currency_id = founded[i].currency_id;
+          await GetData(currency_id).then((returnvalue) => {
+            Data.push(returnvalue);
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } catch (error) {
+    console.log(error);
+  }
+
+  let targetCurrency = await GetData(currency_id);
+  res.render("member", { user: req.user, Data, targetCurrency });
+};
+
+module.exports = { index, changecurrency };

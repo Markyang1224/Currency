@@ -12,24 +12,22 @@
         <div class="filter"></div>
 
         <div class="overflow-auto">
-          <% Data.forEach((elem , idx) => {%>
+          <% Data.forEach((elem , idx) => { %>
           <div>
-            <button type="button" class="btn btn-light">
-              <h4><%= elem.currency_name %></h4>
-            </button>
+            <form action="/member/collection/<%= elem.currency_id %>">
+              <button type="submit" class="btn btn-light">
+                <h4><%= elem.currency_name %></h4>
+              </button>
+            </form>
           </div>
           <% }) %>
         </div>
 
         <!-- 金額顯示 -->
-        <% for(let i = 0 ; i < Data.length ; i++){ %>
-        <div
-          class="value_showing"
-          id="currency:<%= Data[i].currency_id %>"
-          style="display: none"
-        >
+
+        <div class="value_showing">
           <div class="currency">
-            <h1><%= Data[i].currency_name %></h1>
+            <h1><%= targetCurrency.currency_name %></h1>
           </div>
 
           <div class="value">
@@ -39,23 +37,16 @@
             </div>
             <div class="cash">
               <h2><span class="badge bg-secondary">現金</span></h2>
-              <h2><%= Data[i].cash_buy%></h2>
-              <h2><%= Data[i].cash_sell%></h2>
+              <h2><%= targetCurrency.cash_buy%></h2>
+              <h2><%= targetCurrency.cash_sell%></h2>
             </div>
             <div class="deposit">
               <h2><span class="badge bg-secondary">即期</span></h2>
-              <h2><%= Data[i].deposit_buy%></h2>
-              <h2><%= Data[i].deposit_sell%></h2>
+              <h2><%= targetCurrency.deposit_buy%></h2>
+              <h2><%= targetCurrency.deposit_sell%></h2>
             </div>
           </div>
         </div>
-        <% } %>
-
-        <script>
-          $("div.test button").click(() => {
-            console.log("click");
-          });
-        </script>
       </section>
     </main>
   </body>
