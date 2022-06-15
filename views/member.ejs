@@ -14,7 +14,10 @@
         <div class="overflow-auto">
           <% Data.forEach((elem , idx) => { %>
           <div>
-            <form action="/member/collection/<%= elem.currency_id %>">
+            <form
+              action="/member/collection/<%= elem.currency_id %>"
+              method="get"
+            >
               <button type="submit" class="btn btn-light">
                 <h4><%= elem.currency_name %></h4>
               </button>
@@ -22,29 +25,278 @@
           </div>
           <% }) %>
         </div>
-
+        <!-- /////////////////////////////////////////////////////////////////// -->
         <!-- 金額顯示 -->
+        <div class="currency_showing">
+          <div class="value_showing">
+            <div class="currency">
+              <h1><%= targetCurrency.currency_name %></h1>
+            </div>
 
-        <div class="value_showing">
-          <div class="currency">
-            <h1><%= targetCurrency.currency_name %></h1>
+            <div class="value">
+              <div class="buy">
+                <h1>銀行買入價</h1>
+                <h1 class="cash_value"><%= targetCurrency.cash_buy %></h1>
+                <h1 class="deposit_value" style="display: none">
+                  <%= targetCurrency.deposit_buy %>
+                </h1>
+              </div>
+              <div class="sell">
+                <h1>銀行賣出價</h1>
+                <h1 class="cash_value"><%= targetCurrency.cash_sell %></h1>
+                <h1 class="deposit_value" style="display: none">
+                  <%= targetCurrency.deposit_sell %>
+                </h1>
+              </div>
+            </div>
           </div>
 
-          <div class="value">
-            <div class="title">
-              <h1>銀行買入價</h1>
-              <h1>銀行賣入價</h1>
+          <div class="cash_or_deposit">
+            <button
+              type="button"
+              class="btn btn-outline-success"
+              id="cash_rate"
+            >
+              現金匯率
+            </button>
+            <button
+              type="button"
+              class="btn btn-outline-danger"
+              id="deposit_rate"
+            >
+              即期匯率
+            </button>
+          </div>
+        </div>
+
+        <script>
+          $("#cash_rate").click(() => {
+            $(".cash_value").show();
+            $(".deposit_value").hide();
+          });
+          $("#deposit_rate").click(() => {
+            $(".cash_value").hide();
+            $(".deposit_value").show();
+          });
+        </script>
+
+        <!-- /////////////////////////////////////////////////////////////// -->
+        <div class="chart">
+          <form
+            action="/member/collection/<%= targetCurrency.currency_id %>/chart"
+            method="get"
+            id="chart_form"
+          >
+            <select name="days" onchange="change_chart()">
+              <option value="7">7天</option>
+              <option value="30">30天</option>
+              <option value="180">3個月</option>
+            </select>
+          </form>
+
+          <script>
+            function change_chart() {
+              $("#chart_form").submit();
+            }
+          </script>
+
+          <div class="HistoryData" style="display: none">
+            <% History_Data.forEach(e => {%>
+            <div>
+              <p><%= e.month %></p>
+              <p><%= e.date %></p>
+              <p><%= e.cash_buy %></p>
+              <p><%= e.cash_sell %></p>
+              <p><%= e.deposit_buy %></p>
+              <p><%= e.deposit_sell %></p>
             </div>
-            <div class="cash">
-              <h2><span class="badge bg-secondary">現金</span></h2>
-              <h2><%= targetCurrency.cash_buy%></h2>
-              <h2><%= targetCurrency.cash_sell%></h2>
-            </div>
-            <div class="deposit">
-              <h2><span class="badge bg-secondary">即期</span></h2>
-              <h2><%= targetCurrency.deposit_buy%></h2>
-              <h2><%= targetCurrency.deposit_sell%></h2>
-            </div>
+
+            <% }); %>
+          </div>
+          <div class="chart_days" style="display: none">
+            <p><%= days %></p>
+          </div>
+          <script>
+            const HData = []; //總資料
+            const keys = [
+              "month",
+              "date",
+              "cash_buy",
+              "cash_sell",
+              "deposit_buy",
+              "deposit_sell",
+            ];
+            let maxvalue = 0;
+            let minvalue = 0;
+            $(".HistoryData div").each((parentidx, parentelem) => {
+              let Data_temp = {}; //暫存資料
+              let idx = 0;
+              $(parentelem)
+                .children() //p標籤
+                .each((childrenidx, childrenelem) => {
+                  Data_temp[keys[idx]] = childrenelem.innerHTML;
+
+                  if (childrenelem.innerHTML > maxvalue) {
+                    maxvalue = childrenelem.innerHTML;
+                  }
+                  if (childrenelem.innerHTML < minvalue) {
+                    minvalue = childrenelem.innerHTML;
+                  }
+                  idx++;
+                });
+              HData.push(Data_temp);
+            });
+          </script>
+
+          <script>
+            let days = $(".chart_days").text();
+            $(`#chart_form select option[value=${days}]`).attr(
+              "selected",
+              "selected"
+            );
+          </script>
+          <!-- https://www.chartjs.org/docs/latest/charts/line.html -->
+
+          <div class="chart" style="height: 300px; width: 400px">
+            <canvas id="myChart" height="80px" width="100px"></canvas>
+            <script>
+              const labels = [
+                `${HData[6].month}/${HData[6].date}`,
+                `${HData[5].month}/${HData[5].date}`,
+                `${HData[4].month}/${HData[4].date}`,
+                `${HData[3].month}/${HData[3].date}`,
+                `${HData[2].month}/${HData[2].date}`,
+                `${HData[1].month}/${HData[1].date}`,
+                `${HData[0].month}/${HData[0].date}`,
+              ];
+
+              const data1 = {
+                labels: labels,
+                datasets: [
+                  {
+                    label: "銀行買入",
+                    backgroundColor: "rgba(0 , 139 , 69 , 0.8)",
+                    borderColor: "rgba(0 , 139 , 69 , 0.8)",
+                    data: [
+                      `${HData[6].cash_buy}`,
+                      `${HData[5].cash_buy}`,
+                      `${HData[4].cash_buy}`,
+                      `${HData[3].cash_buy}`,
+                      `${HData[2].cash_buy}`,
+                      `${HData[1].cash_buy}`,
+                      `${HData[0].cash_buy}`,
+                    ],
+                  },
+                  {
+                    label: "銀行賣出",
+                    backgroundColor: "rgba(254, 0, 0, 0.8)",
+                    borderColor: "rgba(254, 0, 0, 0.8)",
+                    data: [
+                      `${HData[6].cash_sell}`,
+                      `${HData[5].cash_sell}`,
+                      `${HData[4].cash_sell}`,
+                      `${HData[3].cash_sell}`,
+                      `${HData[2].cash_sell}`,
+                      `${HData[1].cash_sell}`,
+                      `${HData[0].cash_sell}`,
+                    ],
+                  },
+                ],
+              };
+              const data2 = {
+                labels: labels,
+                datasets: [
+                  {
+                    label: "銀行買入",
+                    backgroundColor: "rgba(0, 180, 17, 0.8)",
+                    borderColor: "rgba(0, 180, 17, 0.8)",
+                    data: [
+                      `${HData[6].deposit_buy}`,
+                      `${HData[5].deposit_buy}`,
+                      `${HData[4].deposit_buy}`,
+                      `${HData[3].deposit_buy}`,
+                      `${HData[2].deposit_buy}`,
+                      `${HData[1].deposit_buy}`,
+                      `${HData[0].deposit_buy}`,
+                    ],
+                  },
+                  {
+                    label: "銀行賣出",
+                    backgroundColor: "rgba(254, 0, 0, 0.8)",
+                    borderColor: "rgba(254, 0, 0, 0.8)",
+                    data: [
+                      `${HData[6].deposit_sell}`,
+                      `${HData[5].deposit_sell}`,
+                      `${HData[4].deposit_sell}`,
+                      `${HData[3].deposit_sell}`,
+                      `${HData[2].deposit_sell}`,
+                      `${HData[1].deposit_sell}`,
+                      `${HData[0].deposit_sell}`,
+                    ],
+                  },
+                ],
+              };
+
+              const config1 = {
+                type: "line",
+                data: data1,
+                options: {
+                  borderWidth: 2,
+                  pointBorderWidth: 2,
+                  plugins: {
+                    legend: {
+                      labels: {
+                        // This more specific font property overrides the global property
+                        font: {
+                          weight: "bold",
+                          size: 16,
+                        },
+                      },
+                    },
+                  },
+                },
+              };
+              const config2 = {
+                type: "line",
+                data: data2,
+                options: {
+                  borderWidth: 2,
+                  pointBorderWidth: 2,
+                  plugins: {
+                    legend: {
+                      labels: {
+                        // This more specific font property overrides the global property
+                        font: {
+                          weight: "bold",
+                          size: 16,
+                        },
+                      },
+                    },
+                  },
+                },
+              };
+
+              //注意不能使用const 不然會出錯
+              let myChart = new Chart(
+                document.getElementById("myChart"),
+                config1
+              );
+
+              $("#deposit_rate").click(() => {
+                myChart.destroy();
+                myChart = new Chart(
+                  document.getElementById("myChart"),
+                  config2
+                );
+              });
+              $("#cash_rate").click(() => {
+                myChart.destroy();
+                myChart = new Chart(
+                  document.getElementById("myChart"),
+                  config1
+                );
+              });
+            </script>
           </div>
         </div>
       </section>

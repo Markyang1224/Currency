@@ -30,47 +30,51 @@ main {
       }
     }
 
-    div.value_showing {
+    div.currency_showing {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      align-items: center;
-
-      div.currency {
+      div.value_showing {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: center;
-        margin: 1rem 0rem;
-      }
-      div.value {
-        margin: 1rem 0rem;
+        align-items: center;
 
-        div.title {
+        div.currency {
           display: flex;
           flex-direction: row;
           justify-content: center;
           margin: 1rem 0rem;
-          h1 {
-            margin: 0rem 1rem;
-          }
         }
+        div.value {
+          margin: 1rem 0rem;
 
-        div.cash {
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          margin: 1rem 0rem;
-          h2 {
-            margin: 0rem 1rem;
+          div.title {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin: 1rem 0rem;
+            h1 {
+              margin: 0rem 1rem;
+            }
           }
-        }
-        div.deposit {
-          display: flex;
-          flex-direction: row;
-          justify-content: center;
-          margin: 1rem 0rem;
-          h2 {
-            margin: 0rem 1rem;
+
+          div.cash {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin: 1rem 0rem;
+            h2 {
+              margin: 0rem 1rem;
+            }
+          }
+          div.deposit {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            margin: 1rem 0rem;
+            h2 {
+              margin: 0rem 1rem;
+            }
           }
         }
       }

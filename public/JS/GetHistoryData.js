@@ -40,13 +40,13 @@ async function gethistorydata(year, month, date, id) {
   return Data_temp;
 }
 
-const HistoryData = async (id) => {
+const HistoryData = async (id, days) => {
   let today = new Date(); //今天日期
   today.setDate(today.getDate() - 1); //要抓取歷史資料 要從前一天開始抓
   let Now_year = today.getFullYear();
   let Now_month = today.getMonth() + 1;
   let Now_date = today.getDate();
-  let count = 5; //計數用
+  let count = days; //計數用
   let Data = [];
 
   while (count > 0) {

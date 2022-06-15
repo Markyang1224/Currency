@@ -37,7 +37,17 @@ main section.backimg div.overflow-auto div {
   margin: 1rem 0rem;
 }
 
-main section.backimg div.value_showing {
+main section.backimg div.currency_showing {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+main section.backimg div.currency_showing div.value_showing {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -53,7 +63,7 @@ main section.backimg div.value_showing {
           align-items: center;
 }
 
-main section.backimg div.value_showing div.currency {
+main section.backimg div.currency_showing div.value_showing div.currency {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -67,11 +77,11 @@ main section.backimg div.value_showing div.currency {
   margin: 1rem 0rem;
 }
 
-main section.backimg div.value_showing div.value {
+main section.backimg div.currency_showing div.value_showing div.value {
   margin: 1rem 0rem;
 }
 
-main section.backimg div.value_showing div.value div.title {
+main section.backimg div.currency_showing div.value_showing div.value div.title {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -85,11 +95,11 @@ main section.backimg div.value_showing div.value div.title {
   margin: 1rem 0rem;
 }
 
-main section.backimg div.value_showing div.value div.title h1 {
+main section.backimg div.currency_showing div.value_showing div.value div.title h1 {
   margin: 0rem 1rem;
 }
 
-main section.backimg div.value_showing div.value div.cash {
+main section.backimg div.currency_showing div.value_showing div.value div.cash {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -103,11 +113,11 @@ main section.backimg div.value_showing div.value div.cash {
   margin: 1rem 0rem;
 }
 
-main section.backimg div.value_showing div.value div.cash h2 {
+main section.backimg div.currency_showing div.value_showing div.value div.cash h2 {
   margin: 0rem 1rem;
 }
 
-main section.backimg div.value_showing div.value div.deposit {
+main section.backimg div.currency_showing div.value_showing div.value div.deposit {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -121,7 +131,7 @@ main section.backimg div.value_showing div.value div.deposit {
   margin: 1rem 0rem;
 }
 
-main section.backimg div.value_showing div.value div.deposit h2 {
+main section.backimg div.currency_showing div.value_showing div.value div.deposit h2 {
   margin: 0rem 1rem;
 }
 /*# sourceMappingURL=member.css.map */

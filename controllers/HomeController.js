@@ -59,7 +59,7 @@ const index = async (req, res) => {
   }
 
   let Data = await GetDefaultData();
-  let History_Data = await HistoryData(1); //美元 id = 1
+  let History_Data = await HistoryData(1, 7); //美元 id = 1
   //資料庫查看是否有沒有收藏
 
   async function GetCollectionStatus() {
@@ -149,7 +149,7 @@ const formsubmit = async (req, res) => {
   }
 
   let Data = await GetData();
-  let History_Data = await HistoryData(id);
+  let History_Data = await HistoryData(id, 7);
 
   //資料庫查看是否有沒有收藏
   async function GetCollectionStatus() {
@@ -240,7 +240,7 @@ const collect = async (req, res) => {
   }
 
   let Data = await GetData();
-  let History_Data = await HistoryData(id);
+  let History_Data = await HistoryData(id, 7);
 
   //store data or delete data
 

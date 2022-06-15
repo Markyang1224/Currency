@@ -192,6 +192,8 @@
           <canvas id="myChart" height="80px" width="100px"></canvas>
           <script>
             const labels = [
+              `${HData[6].month}/${HData[6].date}`,
+              `${HData[5].month}/${HData[5].date}`,
               `${HData[4].month}/${HData[4].date}`,
               `${HData[3].month}/${HData[3].date}`,
               `${HData[2].month}/${HData[2].date}`,
@@ -207,6 +209,8 @@
                   backgroundColor: "rgba(0 , 139 , 69 , 0.8)",
                   borderColor: "rgba(0 , 139 , 69 , 0.8)",
                   data: [
+                    `${HData[6].cash_buy}`,
+                    `${HData[5].cash_buy}`,
                     `${HData[4].cash_buy}`,
                     `${HData[3].cash_buy}`,
                     `${HData[2].cash_buy}`,
@@ -219,6 +223,8 @@
                   backgroundColor: "rgba(254, 0, 0, 0.8)",
                   borderColor: "rgba(254, 0, 0, 0.8)",
                   data: [
+                    `${HData[6].cash_sell}`,
+                    `${HData[5].cash_sell}`,
                     `${HData[4].cash_sell}`,
                     `${HData[3].cash_sell}`,
                     `${HData[2].cash_sell}`,
@@ -236,6 +242,8 @@
                   backgroundColor: "rgba(0, 180, 17, 0.8)",
                   borderColor: "rgba(0, 180, 17, 0.8)",
                   data: [
+                    `${HData[6].deposit_buy}`,
+                    `${HData[5].deposit_buy}`,
                     `${HData[4].deposit_buy}`,
                     `${HData[3].deposit_buy}`,
                     `${HData[2].deposit_buy}`,
@@ -248,6 +256,8 @@
                   backgroundColor: "rgba(254, 0, 0, 0.8)",
                   borderColor: "rgba(254, 0, 0, 0.8)",
                   data: [
+                    `${HData[6].deposit_sell}`,
+                    `${HData[5].deposit_sell}`,
                     `${HData[4].deposit_sell}`,
                     `${HData[3].deposit_sell}`,
                     `${HData[2].deposit_sell}`,
