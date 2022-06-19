@@ -13,11 +13,15 @@ const index = async (req, res) => {
         //注意: async await 不能套用在 foreach迴圈, 他會把裡面的function視為一個普通的function,
         // 不管你的return 是不是promise,也不會等到 promise被 resolve或 reject才執行下一次迴圈。
 
-        for (let i = 0; i < founded.length; i++) {
-          let currency_id = founded[i].currency_id;
-          await GetData(currency_id).then((returnvalue) => {
-            Data.push(returnvalue);
-          });
+        if (founded.length > 0) {
+          for (let i = 0; i < founded.length; i++) {
+            let currency_id = founded[i].currency_id;
+            await GetData(currency_id).then((returnvalue) => {
+              Data.push(returnvalue);
+            });
+          }
+        } else {
+          res.render("NoCollectionMember", { user: req.user });
         }
       })
       .catch((err) => {
@@ -30,6 +34,8 @@ const index = async (req, res) => {
   let targetCurrency = Data[0];
   let History_Data = await GetHistoryData(1, 7);
   let days = 7;
+  let History_Data_All;
+
   res.render("member", {
     user: req.user,
     Data,
@@ -69,6 +75,7 @@ const changecurrency = async (req, res) => {
   let targetCurrency = await GetData(currency_id);
   let History_Data = await GetHistoryData(1, 7);
   let days = 7;
+  let History_Data_All;
 
   res.render("member", {
     user: req.user,
@@ -109,6 +116,21 @@ const chartchange = async (req, res) => {
 
   let targetCurrency = await GetData(currency_id);
   let History_Data = await GetHistoryData(currency_id, days);
+
+  if (Object.keys(History_Data).length == 30) {
+    let count = 0; //到7停
+
+    for (let i = 0; i < History_Data.length; i = i + 4) {
+      if (count != 7) {
+        History_Data[count] = History_Data[i];
+      } else {
+        break;
+      }
+      count++;
+    }
+    History_Data.splice(7, History_Data.length - 7);
+  }
+
   res.render("member", {
     user: req.user,
     Data,

@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%- include ("partials/head") %>
+    <%- include("partials/head") %>
     <title>Signup</title>
   </head>
   <body>
-    <%- include ("partials/header") %>
+    <%- include("partials/header") %>
     <main style="padding: 3rem">
       <form action="/auth/signup" method="POST">
+        <%- include("partials/message") %>
+
         <div class="form-group">
           <label for="exampleUsername">Username</label>
           <input

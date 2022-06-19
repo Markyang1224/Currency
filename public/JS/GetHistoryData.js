@@ -73,6 +73,7 @@ const HistoryData = async (id, days) => {
       console.log(err);
     }
   }
+
   return Data;
 };
 

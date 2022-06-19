@@ -10,6 +10,8 @@
     <main>
       <section class="backimg">
         <div class="filter"></div>
+        
+
 
         <div class="overflow-auto">
           <% Data.forEach((elem , idx) => { %>
@@ -81,25 +83,7 @@
         </script>
 
         <!-- /////////////////////////////////////////////////////////////// -->
-        <div class="chart">
-          <form
-            action="/member/collection/<%= targetCurrency.currency_id %>/chart"
-            method="get"
-            id="chart_form"
-          >
-            <select name="days" onchange="change_chart()">
-              <option value="7">7天</option>
-              <option value="30">30天</option>
-              <option value="180">3個月</option>
-            </select>
-          </form>
-
-          <script>
-            function change_chart() {
-              $("#chart_form").submit();
-            }
-          </script>
-
+        <div class="charts">
           <div class="HistoryData" style="display: none">
             <% History_Data.forEach(e => {%>
             <div>
@@ -158,6 +142,24 @@
           <!-- https://www.chartjs.org/docs/latest/charts/line.html -->
 
           <div class="chart" style="height: 300px; width: 400px">
+            <form
+              action="/member/collection/<%= targetCurrency.currency_id %>/chart"
+              method="get"
+              id="chart_form"
+            >
+              <select name="days" onchange="change_chart()">
+                <option value="7">7天</option>
+                <option value="30">30天</option>
+                
+              </select>
+            </form>
+
+            <script>
+              function change_chart() {
+                $("#chart_form").submit();
+              }
+            </script>
+
             <canvas id="myChart" height="80px" width="100px"></canvas>
             <script>
               const labels = [
@@ -295,6 +297,48 @@
                   document.getElementById("myChart"),
                   config1
                 );
+              });
+            </script>
+          </div>
+          <div class="overflow-auto">
+            <table class="table_cash">
+              <tr>
+                <th>日期</th>
+                <th>買入</th>
+                <th>賣出</th>
+              </tr>
+              <% History_Data.forEach((elem , idx) => { %>
+              <tr>
+                <td><%= elem.month%>/<%= elem.date%></th>
+                <td><%= elem.cash_buy%></th>
+                <td><%= elem.cash_sell%></th>
+              </tr>
+              <% }) %>
+            </table>
+
+            <table class="table_deposit" style="display: none">
+              <tr>
+                <th>日期</th>
+                <th>買入</th>
+                <th>賣出</th>
+              </tr>
+              <% History_Data.forEach((elem , idx) => { %>
+              <tr>
+                <td><%= elem.month%>/<%= elem.date%></th>
+                <td><%= elem.deposit_buy%></th>
+                <td><%= elem.deposit_sell%></th>
+              </tr>
+              <% }) %>
+            </table>
+
+            <script>
+              $("#cash_rate").click(() => {
+                $(".table_cash").show();
+                $(".table_deposit").hide();
+              });
+              $("#deposit_rate").click(() => {
+                $(".table_cash").hide();
+                $(".table_deposit").show();
               });
             </script>
           </div>

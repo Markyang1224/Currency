@@ -10,6 +10,7 @@ const Home = require("./controllers/HomeController");
 const Calculator = require("./routes/calculator");
 const Auth = require("./routes/auth_route");
 const Member = require("./routes/member");
+const flash = require("connect-flash");
 
 require("./config/passport");
 
@@ -39,6 +40,16 @@ app.use(
     saveUninitialized: true,
   })
 );
+
+//設定flash  ,locals為一個物件 可自訂一些訊息在裡面
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.success_msg = req.flash("success_msg");
+  res.locals.error_msg = req.flash("error_msg");
+  //passport 專用
+  res.locals.error = req.flash("error");
+  next();
+});
 
 app.use(passport.initialize());
 app.use(passport.session());

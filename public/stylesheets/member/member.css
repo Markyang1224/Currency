@@ -9,6 +9,9 @@ main section.backimg {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
 main section.backimg div.filter {
@@ -45,6 +48,12 @@ main section.backimg div.currency_showing {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 main section.backimg div.currency_showing div.value_showing {
@@ -55,33 +64,12 @@ main section.backimg div.currency_showing div.value_showing {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
 }
 
-main section.backimg div.currency_showing div.value_showing div.currency {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin: 1rem 0rem;
-}
-
 main section.backimg div.currency_showing div.value_showing div.value {
-  margin: 1rem 0rem;
-}
-
-main section.backimg div.currency_showing div.value_showing div.value div.title {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -89,17 +77,29 @@ main section.backimg div.currency_showing div.value_showing div.value div.title 
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   margin: 1rem 0rem;
 }
 
-main section.backimg div.currency_showing div.value_showing div.value div.title h1 {
+main section.backimg div.currency_showing div.value_showing div.value div.buy,
+main section.backimg div.currency_showing div.value_showing div.value div.sell {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin: 0rem 1rem;
 }
 
-main section.backimg div.currency_showing div.value_showing div.value div.cash {
+main section.backimg div.currency_showing div.cash_or_deposit {
+  margin: 1rem 0rem;
+}
+
+main section.backimg div.charts {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -107,31 +107,23 @@ main section.backimg div.currency_showing div.value_showing div.value div.cash {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin: 1rem 0rem;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
-main section.backimg div.currency_showing div.value_showing div.value div.cash h2 {
-  margin: 0rem 1rem;
+main section.backimg div.charts div.chart {
+  margin-bottom: 5rem;
+  margin-right: 3rem;
 }
 
-main section.backimg div.currency_showing div.value_showing div.value div.deposit {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  margin: 1rem 0rem;
+main section.backimg div.charts div.overflow-auto table {
+  border: 1px solid black;
+  border-spacing: 10px;
 }
 
-main section.backimg div.currency_showing div.value_showing div.value div.deposit h2 {
-  margin: 0rem 1rem;
+main section.backimg div.charts div.overflow-auto table th,
+main section.backimg div.charts div.overflow-auto table td {
+  border: 0.5px solid black;
 }
 /*# sourceMappingURL=member.css.map */
