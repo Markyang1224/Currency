@@ -34,7 +34,6 @@ const index = async (req, res) => {
   let targetCurrency = Data[0];
   let History_Data = await GetHistoryData(1, 7);
   let days = 7;
-  let History_Data_All;
 
   res.render("member", {
     user: req.user,
@@ -73,9 +72,8 @@ const changecurrency = async (req, res) => {
   }
 
   let targetCurrency = await GetData(currency_id);
-  let History_Data = await GetHistoryData(1, 7);
+  let History_Data = await GetHistoryData(currency_id, 7);
   let days = 7;
-  let History_Data_All;
 
   res.render("member", {
     user: req.user,

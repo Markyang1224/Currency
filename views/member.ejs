@@ -97,9 +97,7 @@
 
             <% }); %>
           </div>
-          <div class="chart_days" style="display: none">
-            <p><%= days %></p>
-          </div>
+
           <script>
             const HData = []; //總資料
             const keys = [
@@ -132,15 +130,12 @@
             });
           </script>
 
-          <script>
-            let days = $(".chart_days").text();
-            $(`#chart_form select option[value=${days}]`).attr(
-              "selected",
-              "selected"
-            );
-          </script>
+
           <!-- https://www.chartjs.org/docs/latest/charts/line.html -->
 
+          <div class="chart_days" style="display: none">
+            <p><%= days %></p>
+          </div>
           <div class="chart" style="height: 300px; width: 400px">
             <form
               action="/member/collection/<%= targetCurrency.currency_id %>/chart"
@@ -158,6 +153,14 @@
               function change_chart() {
                 $("#chart_form").submit();
               }
+            </script>
+            <script>
+              let days = $(".chart_days p").text();
+              
+              $(`#chart_form select option[value=${days}]`).attr(
+                "selected",
+                "selected"
+              );
             </script>
 
             <canvas id="myChart" height="80px" width="100px"></canvas>
